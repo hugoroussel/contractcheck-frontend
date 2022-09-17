@@ -36,7 +36,7 @@ const Navbar = () => {
               aria-label="Global"
             >
               <div className="flex flex-1 items-center">
-                <div className="flex w-full items-center justify-between md:w-auto">
+                <div className="flex w-full items-center justify-between md:w-auto hover:text-blue-600">
                   <a onClick={(e)=> {e.preventDefault();router.push("/")}}>
                     ContractCheck
                   </a>
@@ -58,7 +58,6 @@ const Navbar = () => {
                   {userAddress.slice(0, 5) + "..." + userAddress.slice(-3)}
                 </p>
                 )}
-                
               </div>
             </nav>
           </div>
