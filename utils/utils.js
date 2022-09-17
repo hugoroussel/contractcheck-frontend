@@ -23,7 +23,10 @@ export const chainIdToNetworkIcon = (chainId) => {
 
 export const chainIdToNetworkName = (chainId) => {
     // hex to decimal
-    chainId = parseInt(chainId.hex, 16);
+    // check if chain id is a big number
+    if (!chainId._isBigNumber) {
+        chainId = parseInt(chainId.hex, 16);
+    }
     switch (chainId.toString()) {
         case "1":
             return 'Ethereum';
@@ -67,7 +70,15 @@ export const chainIdToExplorer = (chainId) => {
 }
 
 export const unixTimeStamptoDate = (timestamp) =>{
-    timestamp = parseInt(timestamp.hex, 16);
+    console.log(timestamp)
+    if (timestamp ===  undefined) {
+        return "N/A";
+    }
+    if (!timestamp._isBigNumber) {
+        timestamp = parseInt(timestamp.hex, 16);
+    } else {
+        timestamp = timestamp.toNumber();
+    }
     var date = new Date(timestamp*1000);
     var year = date.getFullYear();
     var month = date.getMonth()+1;
