@@ -36,7 +36,7 @@ const Navbar = () => {
               aria-label="Global"
             >
               <div className="flex flex-1 items-center">
-                <div className="flex w-full items-center justify-between md:w-auto hover:text-blue-600">
+                <div className="flex w-full items-center justify-between md:w-auto hover:text-blue-600 text-2xl text-bold">
                   <a onClick={(e)=> {e.preventDefault();router.push("/")}}>
                     ContractCheck
                   </a>
