@@ -1,7 +1,8 @@
 import { ethers } from "ethers";
 import { getContractAddress } from "ethers/lib/utils";
 
-const ContractCheckAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+const ContractCheckAddressLocalhost = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+const ContractCheckAddressOptimism = '0x217B182744B4c36a4EB7D7519114DF4106F382cA';
 
 let full_abi = `[
   {
@@ -388,7 +389,19 @@ export const getProvider = () => {
     // check env variable
     if (process.env.NETWORK === 'localhost') {
         return new ethers.providers.JsonRpcProvider('http://localhost:8545');
+    } else {
+        return new ethers.providers.InfuraProvider("https://opt-mainnet.g.alchemy.com/v2/ecpmoryOsL0dCIGSWscHTkh_t1zQ4EYZ");
     }
+}
+
+
+export const getContractAddress = () => {
+  // check env variable
+  if (process.env.NETWORK === 'localhost') {
+      return ContractCheckAddressLocalhost
+  } else {
+      return ContractCheckAddressOptimism
+  }
 }
 
 
@@ -432,7 +445,8 @@ export const invalidateCertificate = async (cid) => {
 // READ Functions
 export const getContractCheckContract = () => {
     let provider = getProvider();
-    let contract = new ethers.Contract(ContractCheckAddress, full_abi, provider);
+    let contractAddress = getContractAddress();
+    let contract = new ethers.Contract(contractAddress, full_abi, provider);
     return contract
 }
 
