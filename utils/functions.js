@@ -427,7 +427,7 @@ export const registerNewCertificate = async (name, contractAddress, chainId) => 
 
 export const validateCertificate = async (cid) => {
   if (window.ethereum.networkVersion !== 10 && process.env.NETWORK !== 'localhost') {
-    chainId = 10;
+    let chainId = 10;
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: `0x${chainId.toString(16)}` }],
@@ -446,7 +446,7 @@ export const validateCertificate = async (cid) => {
 // Write Functions
 export const invalidateCertificate = async (cid) => {
   if (window.ethereum.networkVersion !== 10 && process.env.NETWORK !== 'localhost') {
-    chainId = 10;
+    let chainId = 10;
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: `0x${chainId.toString(16)}` }],
