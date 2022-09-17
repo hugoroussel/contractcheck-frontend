@@ -22,7 +22,6 @@ export default function Certificate() {
 
   async function getNumberOfValidators(){
     let v = await getAllValidatorsOfContract(cid)
-    console.log(validators)
     setValidators(v)
   }
 

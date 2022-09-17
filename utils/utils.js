@@ -5,7 +5,7 @@ export const chainIdToNetworkIcon = (chainId) => {
         case "56":
             return 'https://storage.googleapis.com/zapper-fi-assets/tokens/binance-smart-chain/0x0000000000000000000000000000000000000000.png';
         case "137":
-            return 'https://storage.googleapis.com/zapper-fi-assets/tokens/polygon/0x0000000000000000000000000000000000000000.png';
+            return 'https://assets.coingecko.com/coins/images/4713/small/matic-token-icon.png?1624446912';
         case "43114":
             return 'https://storage.googleapis.com/zapper-fi-assets/tokens/avalanche/0x0000000000000000000000000000000000000000.png';
         case "42161":

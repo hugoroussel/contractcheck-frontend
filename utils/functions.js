@@ -385,7 +385,6 @@ let CC_ABI = [
 
 
 export const getProvider = () => {
-    console.log(process.env.NETWORK)
     // check env variable
     if (process.env.NETWORK === 'localhost') {
         return new ethers.providers.JsonRpcProvider('http://localhost:8545');

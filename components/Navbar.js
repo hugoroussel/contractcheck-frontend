@@ -12,7 +12,6 @@ const Navbar = () => {
 
     async function setAddress(){
       if (typeof window.ethereum !== 'undefined') {
-        console.log('MetaMask is installed!');
       }
       let address = await getCurrentAddress()
       console.log(address)
