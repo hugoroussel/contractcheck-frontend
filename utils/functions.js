@@ -389,7 +389,7 @@ export const getProvider = () => {
     if (process.env.NETWORK === 'localhost') {
         return new ethers.providers.JsonRpcProvider('http://localhost:8545');
     } else {
-        return new ethers.providers.InfuraProvider("https://opt-mainnet.g.alchemy.com/v2/ecpmoryOsL0dCIGSWscHTkh_t1zQ4EYZ");
+        return new ethers.providers.AlchemyProvider("https://opt-mainnet.g.alchemy.com/v2/ecpmoryOsL0dCIGSWscHTkh_t1zQ4EYZ");
     }
 }
 
