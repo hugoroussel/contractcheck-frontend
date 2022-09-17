@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 
 const ContractCheckAddressLocalhost = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
-const ContractCheckAddressOptimism = '0x7E409930295D6778058D5C6C52879f25245221E0';
+const ContractCheckAddressOptimism = '0xB5A49dEB5C8840940c5930cc75E2E175867fb5fb';
 
 let full_abi = `[
   {
@@ -416,6 +416,7 @@ export const registerNewCertificate = async (name, contractAddress, chainId) => 
   }
   let contract = getContractCheckContract()
   let res = await contract.populateTransaction.newCertificate(name, contractAddress, chainId)
+  res.from = window.ethereum.selectedAddress
   // get signer of the current connected wallet
   let tx = await window.ethereum.request({
     method: 'eth_sendTransaction',
@@ -436,6 +437,7 @@ export const validateCertificate = async (cid) => {
   let contract = getContractCheckContract()
   let res = await contract.populateTransaction.batchValidate([cid])
   // get signer of the current connected wallet
+  res.from = window.ethereum.selectedAddress
   let tx = await window.ethereum.request({
     method: 'eth_sendTransaction',
     params: [res]
@@ -454,6 +456,7 @@ export const invalidateCertificate = async (cid) => {
   }
   let contract = getContractCheckContract()
   let res = await contract.populateTransaction.removeValidity(cid)
+  res.from = window.ethereum.selectedAddress
   // get signer of the current connected wallet
   let tx = await window.ethereum.request({
     method: 'eth_sendTransaction',
