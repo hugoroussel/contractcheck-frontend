@@ -385,11 +385,12 @@ let CC_ABI = [
 
 
 export const getProvider = () => {
+    console.log(process.env.NETWORK)
     // check env variable
     if (process.env.NETWORK === 'localhost') {
         return new ethers.providers.JsonRpcProvider('http://localhost:8545');
-    } else {
-        return new ethers.providers.AlchemyProvider("https://opt-mainnet.g.alchemy.com/v2/ecpmoryOsL0dCIGSWscHTkh_t1zQ4EYZ");
+    } else if (process.env.NETWORK === 'optimism'){
+        return new ethers.providers.JsonRpcProvider("https://opt-mainnet.g.alchemy.com/v2/ecpmoryOsL0dCIGSWscHTkh_t1zQ4EYZ");
     }
 }
 
