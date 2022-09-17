@@ -10,6 +10,7 @@ const CertificateCard = (certificate) => {
 
     useEffect(() => {
         getNumberOfValidators()
+        console.log("certificate card", certificate.certificate.chainId.toString())
     })
     
     async function getNumberOfValidators(){

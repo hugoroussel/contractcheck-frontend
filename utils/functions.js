@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 
 const ContractCheckAddressLocalhost = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
-const ContractCheckAddressOptimism = '0x217B182744B4c36a4EB7D7519114DF4106F382cA';
+const ContractCheckAddressOptimism = '0x7E409930295D6778058D5C6C52879f25245221E0';
 
 let full_abi = `[
   {
@@ -217,7 +217,7 @@ let full_abi = `[
         "type": "bytes32"
       }
     ],
-    "name": "getAllValidatorsOfContract",
+    "name": "getAllValidatorsOfCertificate",
     "outputs": [
       {
         "internalType": "address[]",
@@ -408,10 +408,10 @@ export const getContractAddress = () => {
 // Write Functions
 export const registerNewCertificate = async (name, contractAddress, chainId) => {
   if (window.ethereum.networkVersion !== 10 && process.env.NETWORK !== 'localhost') {
-    chainId = 10;
+    let cid = 10;
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: `0x${chainId.toString(16)}` }],
+      params: [{ chainId: `0x${cid.toString(16)}` }],
     });
   }
   let contract = getContractCheckContract()
@@ -492,7 +492,7 @@ export const getCertificateWithCertificateId = async (certifId) => {
 
 export const getAllValidatorsOfContract = async (certifId) => {
   let contract = getContractCheckContract()
-  let validators = await contract.getAllValidatorsOfContract(certifId)
+  let validators = await contract.getAllValidatorsOfCertificate(certifId)
   return validators;
 }
 

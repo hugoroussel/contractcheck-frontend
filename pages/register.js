@@ -7,6 +7,7 @@ export default function Register() {
         let name = document.getElementById("name").value
         let contractAddress = document.getElementById("contractAddress").value
         let chainId = document.getElementById("chainId").value
+        console.log("this is the chain id", chainId)
         let result = await registerNewCertificate(name, contractAddress, chainId)
     }
 
