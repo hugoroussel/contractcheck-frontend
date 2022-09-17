@@ -1,25 +1,33 @@
 import { Popover } from '@headlessui/react'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {router} from 'next/router'
+
 const Navbar = () => {
 
     let [userAddress, setUserAddress] = useState("")
 
+    useEffect(()=> {
+      setAddress()
+      let ua = localStorage.getItem("userAddress")
+      if(ua !== null){
+        setUserAddress(ua)
+      }
+    }, [])
+
     async function getCurrentAddress(){
       let accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      // set accounts[0] in local storage
+      localStorage.setItem("userAddress", accounts[0])
       return accounts[0]
     }
 
     async function setAddress(){
       if (typeof window.ethereum !== 'undefined') {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
       }
       let address = await getCurrentAddress()
-      console.log(address)
       setUserAddress(address)
     }
-
-
-
     return(
        <Popover as="header" className="relative">
           <div className="bg-white pt-6">

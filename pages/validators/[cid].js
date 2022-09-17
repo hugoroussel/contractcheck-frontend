@@ -35,7 +35,6 @@ export default function Validators() {
   return (
     <div className="bg-white">
       <div className="relative overflow-hidden">
-      <Navbar/>
         <main>
 
           {/* Feature section with grid */}

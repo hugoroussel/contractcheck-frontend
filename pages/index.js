@@ -22,18 +22,32 @@ export default function Index() {
   }, [])
 
   async function getIndexed() {
-    let indexed = await getAllIndexed()
-    setTotalIndexed(indexed.length)
+    let indexes = localStorage.getItem("indexes")
+    if (indexes === null) {
+      let indexed = await getAllIndexed()
+      setTotalIndexed(indexed.length)
+    } else {
+      setTotalIndexed(indexes.length)
+    }
   }
 
   async function getCertificate(){
+    let certificates = localStorage.getItem("certificates")
     let indexed = await getAllIndexed()
-    let result = []
-    for(let i = 0; i < indexed.length; i++){
-      let certificate = await getCertificateWithCertificateId(indexed[i])
-      result.push(certificate)
-    }
+    if (certificates === null || indexed.length !== JSON.parse(certificates).length) {
+      // console.log("new certificate was added?",indexed.length !== JSON.parse(certificates).length)
+      let result = []
+      for(let i = 0; i < indexed.length; i++){
+        let certificate = await getCertificateWithCertificateId(indexed[i])
+        result.push(certificate)
+      }
       setCertificates(result)
+      localStorage.setItem("certificates", JSON.stringify(result))
+    } else {
+      console.log("found in the cache and parsed", JSON.parse(certificates))
+      // let certsParsed = JSON.parse(certificates)
+      setCertificates(JSON.parse(certificates))
+    }
   }
 
   async function launchSearch(){
@@ -46,7 +60,6 @@ export default function Index() {
   return (
     <div className="bg-white">
       <div className="relative overflow-hidden">
-        <Navbar/>
         <main>
 
           {/* Feature section with grid */}

@@ -43,7 +43,6 @@ export default function Address() {
   return (
     <div className="bg-white">
       <div className="relative overflow-hidden">
-      <Navbar/>
         <main>
 
           {/* Feature section with grid */}

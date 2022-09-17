@@ -45,7 +45,6 @@ export default function Certificate() {
   
   return (
     <>
-    <Navbar/>
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-5">
     <div className="overflow-hidden bg-white shadow sm:rounded-lg">
       <div className="px-4 py-5 sm:px-6">
@@ -105,7 +104,7 @@ export default function Certificate() {
                 className="inline-flex items-center rounded-md border border-transparent bg-red-600 px-2 py-1 text-sm font-medium leading-4 text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                 onClick={(e) => {e.preventDefault();invalidateCertificate(currentCertificate[0])}}
                 >
-                Invalidate (only owner)
+                Invalidate (only owner of certificate)
                 </button>
             </dd>
           </div>
@@ -119,7 +118,7 @@ export default function Certificate() {
               <ul role="list" className="divide-y divide-gray-200 rounded-md border border-gray-200">
                 {validators.map((validator,i) => (
                     <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm" key={i}>
-                      <a href={"https://debank.com/profile/"+currentCertificate[3]} target="_blank" rel="noreferrer" className="font-medium text-indigo-600 hover:text-indigo-500">
+                      <a href={"https://debank.com/profile/"+validator} target="_blank" rel="noreferrer" className="font-medium text-indigo-600 hover:text-indigo-500">
                         {validator}
                       </a>
                     </li>
