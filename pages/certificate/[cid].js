@@ -73,7 +73,7 @@ export default function Certificate() {
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Address of contract</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 hover:text-blue-400">
-                <a href={explorerLinkContract} target="_blank">
+                <a href={explorerLinkContract} target="_blank" rel="noreferrer" >
                 {currentCertificate[2]}
                 </a>
             </dd>
@@ -81,7 +81,7 @@ export default function Certificate() {
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Creator of certificate</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 hover:text-blue-400">
-                <a href={"https://debank.com/profile/"+currentCertificate[3]} target="_blank">
+                <a href={"https://debank.com/profile/"+currentCertificate[3]} target="_blank" rel="noreferrer">
                 {currentCertificate[3]}
                 </a>
             </dd>
@@ -114,15 +114,15 @@ export default function Certificate() {
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-blue-500">
-                <a href={"/validators/"+currentCertificate[0]} target='_blank'>
+                <a href={"/validators/"+currentCertificate[0]} target='_blank' rel="noreferrer">
                 See all Validators ({validators.length})
                 </a>
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <ul role="list" className="divide-y divide-gray-200 rounded-md border border-gray-200">
-                {validators.map((validator) => (
-                    <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                      <a href={"https://debank.com/profile/"+currentCertificate[3]} target="_blank" className="font-medium text-indigo-600 hover:text-indigo-500">
+                {validators.map((validator,i) => (
+                    <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm" key={i}>
+                      <a href={"https://debank.com/profile/"+currentCertificate[3]} target="_blank" rel="noreferrer" className="font-medium text-indigo-600 hover:text-indigo-500">
                         {validator}
                       </a>
                     </li>

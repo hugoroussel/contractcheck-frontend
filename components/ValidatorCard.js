@@ -47,7 +47,7 @@ const ValidatorCard = (validatorAddress) => {
           <div className="flex-1 truncate">
             <div className="flex items-center space-x-3">
               <h3 className="truncate text-sm font-medium text-blue-900">
-                <a href={"https://debank.com/profile/"+validatorAddress.validatorAddress} target="_blank">
+                <a href={"https://debank.com/profile/"+validatorAddress.validatorAddress} target="_blank" rel="noreferrer">
                 Validator : {validatorAddress.validatorAddress}
                 </a>
               </h3>

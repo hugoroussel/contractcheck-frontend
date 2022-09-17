@@ -45,7 +45,7 @@ export default function Validators() {
                 <div>
                 <h3 className="text-lg font-medium leading-6 text-gray-900">
                   All validators ({validatorAddresses.length} validator(s)) for certificate &nbsp;
-                  <a href={"/certificate/"+cid} target="_blank" className="text-blue-500">
+                  <a href={"/certificate/"+cid} target="_blank" rel="noreferrer" className="text-blue-500">
                   {cid === undefined ?
                    (<></>):
                     (
