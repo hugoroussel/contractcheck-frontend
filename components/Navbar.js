@@ -1,6 +1,6 @@
 import { Popover } from '@headlessui/react'
-
 import {useState} from 'react'
+import {router} from 'next/router'
 const Navbar = () => {
 
     let [userAddress, setUserAddress] = useState("")
@@ -30,7 +30,7 @@ const Navbar = () => {
             >
               <div className="flex flex-1 items-center">
                 <div className="flex w-full items-center justify-between md:w-auto">
-                  <a href="/">
+                  <a onClick={(e)=> {e.preventDefault();router.push("/")}}>
                     ContractCheck
                   </a>
                 </div>

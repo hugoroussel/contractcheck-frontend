@@ -69,7 +69,7 @@ export default function Address() {
                     <h3 className="text-lg font-medium leading-6 text-gray-900">{certificates.length} result(s)</h3>
                     <ul className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
                         {certificates.map((item,i) => (
-                          <CertificateCard certificate={item}/>
+                          <CertificateCard key={i} certificate={item}/>
                         ))}
                     </ul>
                     </div>
