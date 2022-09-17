@@ -1,5 +1,4 @@
 import { ethers } from "ethers";
-import { getContractAddress } from "ethers/lib/utils";
 
 const ContractCheckAddressLocalhost = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 const ContractCheckAddressOptimism = '0x217B182744B4c36a4EB7D7519114DF4106F382cA';
@@ -406,8 +405,14 @@ export const getContractAddress = () => {
 
 
 // Write Functions
-
 export const registerNewCertificate = async (name, contractAddress, chainId) => {
+  if (window.ethereum.networkVersion !== 10 && process.env.NETWORK !== 'localhost') {
+    chainId = 10;
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: `0x${chainId.toString(16)}` }],
+    });
+  }
   let contract = getContractCheckContract()
   let res = await contract.populateTransaction.newCertificate(name, contractAddress, chainId)
   // get signer of the current connected wallet
@@ -420,6 +425,13 @@ export const registerNewCertificate = async (name, contractAddress, chainId) => 
 
 
 export const validateCertificate = async (cid) => {
+  if (window.ethereum.networkVersion !== 10 && process.env.NETWORK !== 'localhost') {
+    chainId = 10;
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: `0x${chainId.toString(16)}` }],
+    });
+  }
   let contract = getContractCheckContract()
   let res = await contract.populateTransaction.batchValidate([cid])
   // get signer of the current connected wallet
@@ -432,6 +444,13 @@ export const validateCertificate = async (cid) => {
 
 // Write Functions
 export const invalidateCertificate = async (cid) => {
+  if (window.ethereum.networkVersion !== 10 && process.env.NETWORK !== 'localhost') {
+    chainId = 10;
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: `0x${chainId.toString(16)}` }],
+    });
+  }
   let contract = getContractCheckContract()
   let res = await contract.populateTransaction.removeValidity(cid)
   // get signer of the current connected wallet
