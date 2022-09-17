@@ -21,9 +21,11 @@ const ValidatorCard = (validatorAddress) => {
     
     async function getValidatorNetworth(){
         let res = await axios.get("https://app.ondefy.com/v1/node/getUserWallet?evmAddr="+validatorAddress.validatorAddress)
+        let totalInUSD = 0
         for(let i = 0; i < res.data.length; i++){
-            setValidatorNetworth(validatorNetworth + res.data[i].balanceUSD)
+            totalInUSD = totalInUSD + res.data[i].balanceUSD
         }
+        setValidatorNetworth(totalInUSD)
     }
 
     async function getValidatorEns(){
