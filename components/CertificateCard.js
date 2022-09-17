@@ -1,7 +1,7 @@
 import { Popover } from '@headlessui/react'
 import { ShieldCheckIcon, PhoneIcon, DocumentMagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { useEffect, useState } from 'react'
-import {chainIdToNetworkIcon, unixTimeStamptoDate} from '../utils/utils'
+import {chainIdToNetworkIcon, unixTimeStamptoDate,chainIdToNetworkName} from '../utils/utils'
 import {getAllValidatorsOfContract} from '../utils/functions'   
 
 const CertificateCard = (certificate) => {
@@ -25,6 +25,7 @@ const CertificateCard = (certificate) => {
               <h3 className="truncate text-sm font-medium text-gray-900">{certificate.certificate.name}</h3>
             </div>
             <p className="mt-1 truncate text-sm text-gray-500">Certificate creation : {unixTimeStamptoDate(certificate.certificate.creationTime)}</p>
+            <p className="mt-1 truncate text-sm text-gray-500">Network : {chainIdToNetworkName(certificate.certificate.chainId)}</p>
           </div>
           <img className="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300" src={chainIdToNetworkIcon(certificate.certificate.chainId)} alt="" />
         </div>
