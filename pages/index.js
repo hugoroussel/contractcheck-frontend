@@ -44,7 +44,7 @@ export default function Index() {
       setCertificates(result)
       localStorage.setItem("certificates", JSON.stringify(result))
     } else {
-      console.log("found in the cache and parsed", JSON.parse(certificates))
+      // console.log("found in the cache and parsed", JSON.parse(certificates))
       // let certsParsed = JSON.parse(certificates)
       setCertificates(JSON.parse(certificates))
     }

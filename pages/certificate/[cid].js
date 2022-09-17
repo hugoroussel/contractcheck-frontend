@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar'
 import { useRouter } from 'next/router'
 import {getCertificateWithCertificateId, validateCertificate,invalidateCertificate,getAllValidatorsOfContract} from '../../utils/functions'
-import { chainIdToExplorer, unixTimeStamptoDate, chainIdToNetworkName } from '../../utils/utils'
+import { chainIdToExplorer, unixTimeStamptoDate, chainIdToNetworkName, getValidatorEns} from '../../utils/utils'
 
 
 export default function Certificate() {
@@ -17,21 +17,23 @@ export default function Certificate() {
     }
     getCertificateInformation()
     getNumberOfValidators()
+    
   }, [router])
-
-
-  async function getNumberOfValidators(){
-    let v = await getAllValidatorsOfContract(cid)
-    setValidators(v)
-  }
-
 
   let [currentCertificate, setCurrentCertificate] = useState({})
   let [explorerLinkContract, setExplorerLinkContract] = useState("")
   let [networkName, setNetworkName] = useState("")
   let [certificateValidity, setCertificateValidity] = useState(false)
   let [validators, setValidators] = useState([])
-  
+  let [ens, setEns] = useState("")
+
+  useEffect(() => {handleGetEns()}, [currentCertificate])
+
+  async function getNumberOfValidators(){
+    let v = await getAllValidatorsOfContract(cid)
+    setValidators(v)
+  }
+
   async function getCertificateInformation(){
     if (router.query.cid === undefined) {
         return
@@ -41,6 +43,11 @@ export default function Certificate() {
     setExplorerLinkContract(chainIdToExplorer(c.chainId) + "/address/" + c.contractAddress)
     setNetworkName(chainIdToNetworkName(c.chainId))
     setCertificateValidity(c[5])
+  }
+
+  async function handleGetEns(){
+    let name = await getValidatorEns(currentCertificate[3])
+    setEns(name)
   }
   
   return (
@@ -78,7 +85,7 @@ export default function Certificate() {
             <dt className="text-sm font-medium text-gray-500">Creator of certificate</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 hover:text-blue-400">
                 <a href={"https://debank.com/profile/"+currentCertificate[3]} target="_blank" rel="noreferrer">
-                {currentCertificate[3]}
+                {currentCertificate[3]} { ens=== "" ? "" : "("+ens+")"}
                 </a>
             </dd>
           </div>
@@ -109,8 +116,8 @@ export default function Certificate() {
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-            <dt className="text-sm font-medium text-blue-500">
-                <a href={"/validators/"+currentCertificate[0]} target='_blank' rel="noreferrer">
+            <dt className="text-sm font-medium text-blue-500 hover:cursor-pointer">
+                <a href={"/validators/"+currentCertificate[0]}>
                 See all Validators ({validators.length})
                 </a>
             </dt>

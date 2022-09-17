@@ -1,3 +1,5 @@
+import {ethers} from 'ethers'
+
 export const chainIdToNetworkIcon = (chainId) => {
     chainId = parseInt(chainId.hex, 16);
     switch (chainId.toString()) {
@@ -70,7 +72,6 @@ export const chainIdToExplorer = (chainId) => {
 }
 
 export const unixTimeStamptoDate = (timestamp) =>{
-    console.log(timestamp)
     if (timestamp ===  undefined) {
         return "N/A";
     }
@@ -90,4 +91,14 @@ export const unixTimeStamptoDate = (timestamp) =>{
         month = '0' + month;
     }
     return (dt+'-'+month+'-'+year);
+}
+
+export const getValidatorEns = async (address) => {
+    let provider = new ethers.providers.JsonRpcProvider("https://eth-mainnet.g.alchemy.com/v2/MmxYpuE8DZTHveRSqIijqQg_u5qPCv0M")
+    var name = await provider.lookupAddress(address);
+    if (name === null) {
+      return ""
+    } else {
+      return name
+    }
 }

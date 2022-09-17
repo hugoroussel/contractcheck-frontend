@@ -1,11 +1,10 @@
 import { Popover } from '@headlessui/react'
 import { ShieldCheckIcon, PhoneIcon, DocumentMagnifyingGlassIcon, NoSymbolIcon } from '@heroicons/react/20/solid'
 import { useEffect, useState } from 'react'
-import {chainIdToNetworkIcon, unixTimeStamptoDate} from '../utils/utils'
+import {chainIdToNetworkIcon, unixTimeStamptoDate,getValidatorEns} from '../utils/utils'
 import {getAllValidatorsOfContract} from '../utils/functions'   
 import axios from "axios"
 import { useRouter } from "next/router"
-import { ethers } from 'ethers'
 const ValidatorCard = (validatorAddress) => {
 
     let router = useRouter()
@@ -16,7 +15,7 @@ const ValidatorCard = (validatorAddress) => {
 
     useEffect(() => {
         getValidatorNetworth()
-        getValidatorEns()
+        handleGetEns()
     },[router])
     
     async function getValidatorNetworth(){
@@ -28,15 +27,12 @@ const ValidatorCard = (validatorAddress) => {
         setValidatorNetworth(totalInUSD)
     }
 
-    async function getValidatorEns(){
-      let provider = new ethers.providers.JsonRpcProvider("https://eth-mainnet.g.alchemy.com/v2/MmxYpuE8DZTHveRSqIijqQg_u5qPCv0M")
-      var name = await provider.lookupAddress(validatorAddress.validatorAddress);
-      if (name === null) {
-        setEns("No ENS")
-      } else {
-        setEns(name)
-      }
+    async function handleGetEns(){
+      let name = await getValidatorEns(validatorAddress.validatorAddress)
+      setEns(name)
     }
+
+    
     
 
     return(
@@ -65,7 +61,7 @@ const ValidatorCard = (validatorAddress) => {
               <div
                 className="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700"
               >
-                {ens === "No ENS" ? 
+                {ens === "" ? 
                 <>
                 No Ens
                 &nbsp;

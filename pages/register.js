@@ -30,7 +30,7 @@ export default function Register() {
                 type="text"
                 name="name"
                 id="name"
-                className="block w-full rounded-md border-grey-300 border-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-grey-300 border-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
                 placeholder="Aave usdc lending pool v2 mainnet"
                 />
             </div>
@@ -44,7 +44,7 @@ export default function Register() {
                 type="text"
                 name="name"
                 id="contractAddress"
-                className="block w-full rounded-md border-grey-300 border-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-grey-300 border-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
                 placeholder="0x1234567890abcdef1234567890abcdef12345678"
                 />
             </div>
@@ -58,8 +58,8 @@ export default function Register() {
                 type="number"
                 name="name"
                 id="chainId"
-                className="block w-full rounded-md border-grey-300 border-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                placeholder="1 mainnet, 10 optimism"
+                className="block w-full rounded-md border-grey-300 border-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
+                placeholder="1 mainnet, 10 optimism, 250 fantom, etc.."
                 />
             </div>
             </form>
