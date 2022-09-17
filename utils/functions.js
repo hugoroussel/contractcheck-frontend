@@ -407,13 +407,7 @@ export const getContractAddress = () => {
 
 // Write Functions
 export const registerNewCertificate = async (name, contractAddress, chainId) => {
-  if (window.ethereum.networkVersion !== 10 && process.env.NETWORK !== 'localhost') {
-    let cid = 10;
-    await window.ethereum.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: `0x${cid.toString(16)}` }],
-    });
-  }
+  await openMetamaskAndSwitchToOptimism()
   let contract = getContractCheckContract()
   let res = await contract.populateTransaction.newCertificate(name, contractAddress, chainId)
   res.from = window.ethereum.selectedAddress
@@ -422,18 +416,11 @@ export const registerNewCertificate = async (name, contractAddress, chainId) => 
     method: 'eth_sendTransaction',
     params: [res]
   })
-  console.log("tx went through?",tx)
 }
 
 
 export const validateCertificate = async (cid) => {
-  if (window.ethereum.networkVersion !== 10 && process.env.NETWORK !== 'localhost') {
-    let chainId = 10;
-    await window.ethereum.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: `0x${chainId.toString(16)}` }],
-    });
-  }
+  await openMetamaskAndSwitchToOptimism()
   let contract = getContractCheckContract()
   let res = await contract.populateTransaction.batchValidate([cid])
   // get signer of the current connected wallet
@@ -442,18 +429,11 @@ export const validateCertificate = async (cid) => {
     method: 'eth_sendTransaction',
     params: [res]
   })
-  console.log("tx went through?",tx)
 }
 
 // Write Functions
 export const invalidateCertificate = async (cid) => {
-  if (window.ethereum.networkVersion !== 10 && process.env.NETWORK !== 'localhost') {
-    let chainId = 10;
-    await window.ethereum.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: `0x${chainId.toString(16)}` }],
-    });
-  }
+  await openMetamaskAndSwitchToOptimism()
   let contract = getContractCheckContract()
   let res = await contract.populateTransaction.removeValidity(cid)
   res.from = window.ethereum.selectedAddress
@@ -462,7 +442,6 @@ export const invalidateCertificate = async (cid) => {
     method: 'eth_sendTransaction',
     params: [res]
   })
-  console.log("tx went through?",tx)
 }
 
 // READ Functions
@@ -488,7 +467,6 @@ export const getCertificatesForAddress = async (address) => {
 export const getCertificateWithCertificateId = async (certifId) => {
     let contract = getContractCheckContract()
     let cid = ethers.utils.hexlify(certifId)    
-    console.log("CID", cid)
     let certificate = await contract.certificateRegistry(cid)
     return certificate;
 }
@@ -497,5 +475,18 @@ export const getAllValidatorsOfContract = async (certifId) => {
   let contract = getContractCheckContract()
   let validators = await contract.getAllValidatorsOfCertificate(certifId)
   return validators;
+}
+
+export const openMetamaskAndSwitchToOptimism = async () => {
+  if (window.ethereum.selectedAddress === null) {
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+  }
+  if (window.ethereum.networkVersion !== 10 && process.env.NETWORK !== 'localhost') {
+    let chainId = 10;
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: `0x${chainId.toString(16)}` }],
+    });
+  }
 }
 

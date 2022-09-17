@@ -20,19 +20,15 @@ const ValidatorCard = (validatorAddress) => {
     },[router])
     
     async function getValidatorNetworth(){
-        console.log("validator address", validatorAddress)
         let res = await axios.get("https://app.ondefy.com/v1/node/getUserWallet?evmAddr="+validatorAddress.validatorAddress)
-        console.log("res", res.data);
         for(let i = 0; i < res.data.length; i++){
             setValidatorNetworth(validatorNetworth + res.data[i].balanceUSD)
         }
     }
 
     async function getValidatorEns(){
-      console.log("validator address", validatorAddress)
       let provider = new ethers.providers.JsonRpcProvider("https://eth-mainnet.g.alchemy.com/v2/MmxYpuE8DZTHveRSqIijqQg_u5qPCv0M")
       var name = await provider.lookupAddress(validatorAddress.validatorAddress);
-      console.log("name", name)
       if (name === null) {
         setEns("No ENS")
       } else {

@@ -28,7 +28,6 @@ export default function Address() {
         return
     }
     let cids = await getCertificatesForAddress(router.query.address)
-    console.log("CIDs", cids)
     if (cids.length === 0) {
         setNoResult(true)
     } else {

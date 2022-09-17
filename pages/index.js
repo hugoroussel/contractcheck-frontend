@@ -23,7 +23,6 @@ export default function Index() {
 
   async function getIndexed() {
     let indexed = await getAllIndexed()
-    console.log("indexed", indexed)
     setTotalIndexed(indexed.length)
   }
 
@@ -38,10 +37,8 @@ export default function Index() {
   }
 
   async function launchSearch(){
-    console.log("search")
     // get value of form with contractSearch id
     let contractSearch = document.getElementById("contractSearch").value
-    console.log("contractSearch", contractSearch)
     router.push('/contract/' + contractSearch)
 
   }

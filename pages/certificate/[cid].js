@@ -39,10 +39,8 @@ export default function Certificate() {
     }
     let c = await getCertificateWithCertificateId(router.query.cid)
     setCurrentCertificate(c)
-    console.log("Certificate", c)
     setExplorerLinkContract(chainIdToExplorer(c.chainId) + "/address/" + c.contractAddress)
     setNetworkName(chainIdToNetworkName(c.chainId))
-    console.log("Certificate validity", c[5])
     setCertificateValidity(c[5])
   }
   
