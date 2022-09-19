@@ -69,7 +69,7 @@ export default function Index() {
                 Check Before You Sign
               </p>
               <p className="mx-auto mt-5 max-w-prose text-xl text-gray-500">
-                Avoir interacting with malicious contracts. Check what the community thinks of the contract address before you sign.
+                Avoid interacting with malicious contracts. Check what the community thinks of the contract address before you sign.
               </p>
               <div className="mt-12 place-content-center">
                 <form action="#" className="sm:mx-auto sm:max-w-xl lg:mx-1000 place-content-center">
